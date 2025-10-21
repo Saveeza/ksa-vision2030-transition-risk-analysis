@@ -1,0 +1,46 @@
+# =============================================================================
+# MASTER CONFIGURATION FOR THE KSA TRANSITION RISK ANALYSIS
+# =============================================================================
+
+# --- Metadata for traceability and version control ---
+metadata:
+  version: "1.2.0" # Version updated to reflect final architectural hardening
+  author: "Saveeza Aziz"
+  last_updated: "2025-10-21" # <<< Updated to current date
+
+# --- Path definitions relative to the project root ---
+paths:
+  data_dir: "data"
+  results_dir: "results"
+
+# --- Source file definitions ---
+files:
+  archetypes_file: "simulated_archetype_data.xlsx"
+  assumptions_file:
+    path: "model_assumptions.csv"
+    # Defines the expected structure for validation
+    key_columns:
+      - "Parameter"
+      - "Value"
+
+# --- Physical and conversion constants ---
+# Quoted as strings to ensure consistent parsing as text before conversion in Python.
+constants:
+  tons_per_megaton: "1000000"
+  sar_per_billion: "1000000000"
+
+# =============================================================================
+# SECTOR-SPECIFIC PARAMETERS FOR MODULAR ANALYSIS
+# =============================================================================
+# This structure allows for easy addition of new sectors (e.g., 'petrochemicals', 'utilities')
+sectors:
+  cement:
+    # The exact name of the sheet in the archetypes_file
+    sheet_name: "Cement_Sector"
+    # Columns required for the model to run, used for data validation
+    required_columns:
+      - "Company_Archetype"
+      - "Reported_EBITDA_SAR_bn"
+      - "Scope_1_2_Emissions_MtCO2"
+      - "Debt_to_EBITDA_Ratio"
+      - "FCF_5Y_Avg_SAR_bn"
